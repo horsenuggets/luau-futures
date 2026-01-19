@@ -1,23 +1,21 @@
 [package]
-name = "yetanotherclown/luau-futures"
+name = "horsenuggets/luau-futures"
 description = "Rust-like futures for Luau"
 version = "2.0.0-beta.3"
 license = "MIT"
 authors = ["YetAnotherClown"]
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
-
-# publish-wally.sh will clone to /dist and run wally publish in that directory
-exclude = [
-    "tests",
-    "tests/*",
-    "src/__*__",
-    "src/__*__/*",
-    "package.json",
-    "*.tgz",
-    "*.zip",
+repository = "https://github.com/horsenuggets/luau-futures"
+include = [
+    "default.project.json",
+    "LICENSE",
+    "README.md",
+    "init.luau",
+    "src",
+    "wally.toml",
 ]
-include = ["wally.lock"]
+exclude = ["**"]
 
 [dev-dependencies]
 Jest = "jsdotlua/jest@3.6.1-rc.2"
