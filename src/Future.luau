@@ -37,18 +37,18 @@ Future.__index = Future
 --- After completion, passes the Result of the current future
 --- to the closure, returning a new Future.
 function Future:after(fn)
-	-- DEVIATION: `then` is a reserved keyword in Luau,
-	-- this method is equivalent to FutureExt::then
-	return self.new(function()
-		local future = fn(self:await())
-		local result = future:await()
+    -- DEVIATION: `then` is a reserved keyword in Luau,
+    -- this method is equivalent to FutureExt::then
+    return self.new(function()
+        local future = fn(self:await())
+        local result = future:await()
 
-		if result:isOk() then
-			return result:unwrapOk()
-		elseif result:isErr() then
-			error(result:unwrapErr(), 0)
-		end
-	end)
+        if result:isOk() then
+            return result:unwrapOk()
+        elseif result:isErr() then
+            error(result:unwrapErr(), 0)
+        end
+    end)
 end
 
 --- @method andThen
@@ -60,22 +60,22 @@ end
 --- created within the closure, with the Ok result passed in the
 --- closure arguments, otherwise it is never executed.
 function Future:andThen(fn)
-	return self.new(function()
-		local result = self:await()
+    return self.new(function()
+        local result = self:await()
 
-		if result:isOk() then
-			local newFuture = fn(result:unwrapOk())
-			local newResult = newFuture:await()
+        if result:isOk() then
+            local newFuture = fn(result:unwrapOk())
+            local newResult = newFuture:await()
 
-			if newResult:isOk() then
-				return newResult:unwrapOk()
-			elseif newResult:isErr() then
-				error(newResult:unwrapErr(), 0)
-			end
-		elseif result:isErr() then
-			error(result:unwrapErr(), 0)
-		end
-	end)
+            if newResult:isOk() then
+                return newResult:unwrapOk()
+            elseif newResult:isErr() then
+                error(newResult:unwrapErr(), 0)
+            end
+        elseif result:isErr() then
+            error(result:unwrapErr(), 0)
+        end
+    end)
 end
 
 --- @method await
@@ -92,15 +92,15 @@ end
 --- See [Future:poll] for the recommended way of executing Futures.
 --- :::
 function Future:await()
-	local poll = self:poll()
+    local poll = self:poll()
 
-	if not poll:isReady() then
-		table.insert(self._yieldedThreads, coroutine.running())
-		coroutine.yield()
-	end
+    if not poll:isReady() then
+        table.insert(self._yieldedThreads, coroutine.running())
+        coroutine.yield()
+    end
 
-	poll = self:poll()
-	return poll:unwrap()
+    poll = self:poll()
+    return poll:unwrap()
 end
 
 --- @method inspectErr
@@ -110,13 +110,13 @@ end
 ---
 --- Allows you to read the error value of a Future before passing it on.
 function Future:inspectErr(fn)
-	table.insert(self._onCompletion, {
-		on = "Err",
-		type = "inspect",
-		fn = fn,
-	})
+    table.insert(self._onCompletion, {
+        on = "Err",
+        type = "inspect",
+        fn = fn,
+    })
 
-	return self
+    return self
 end
 
 --- @method inspectOk
@@ -126,13 +126,13 @@ end
 ---
 --- Allows you to read the success value of a Future before passing it on.
 function Future:inspectOk(fn)
-	table.insert(self._onCompletion, {
-		on = "Ok",
-		type = "inspect",
-		fn = fn,
-	})
+    table.insert(self._onCompletion, {
+        on = "Ok",
+        type = "inspect",
+        fn = fn,
+    })
 
-	return self
+    return self
 end
 
 --- @method join
@@ -149,23 +149,23 @@ end
 --- whereas Results of type Err will not be unwrapped
 --- and will be added as `Result<E, never>` in the table.
 function Future:join(otherFuture)
-	return self.new(function()
-		local result = self:await()
-		local otherResult = otherFuture:await()
+    return self.new(function()
+        local result = self:await()
+        local otherResult = otherFuture:await()
 
-		-- unwrapOk and unwrapErr are functionally similar
-		local results = result:isOk() and { result:unwrapOk() } or { result }
+        -- unwrapOk and unwrapErr are functionally similar
+        local results = result:isOk() and { result:unwrapOk() } or { result }
 
-		if otherResult:isOk() then
-			for _, v in { otherResult:unwrapOk() } do
-				table.insert(results, v)
-			end
-		else
-			table.insert(results, otherResult)
-		end
+        if otherResult:isOk() then
+            for _, v in { otherResult:unwrapOk() } do
+                table.insert(results, v)
+            end
+        else
+            table.insert(results, otherResult)
+        end
 
-		return results
-	end)
+        return results
+    end)
 end
 
 --- @method joinAll
@@ -175,15 +175,15 @@ end
 ---
 --- Joins the results of two or more futures into a table.
 function Future:joinAll(...)
-	local previousFuture = self
+    local previousFuture = self
 
-	for i = 1, select("#", ...) do
-		previousFuture = self.join(previousFuture, select(i, ...)):mapOk(function(t)
-			return table.unpack(t)
-		end)
-	end
+    for i = 1, select("#", ...) do
+        previousFuture = self.join(previousFuture, select(i, ...)):mapOk(function(t)
+            return table.unpack(t)
+        end)
+    end
 
-	return previousFuture
+    return previousFuture
 end
 
 --- @method mapErr
@@ -193,13 +193,13 @@ end
 ---
 --- Maps the type of the Err result of a Future.
 function Future:mapErr(fn)
-	table.insert(self._onCompletion, {
-		on = "Err",
-		type = "map",
-		fn = fn,
-	})
+    table.insert(self._onCompletion, {
+        on = "Err",
+        type = "map",
+        fn = fn,
+    })
 
-	return self
+    return self
 end
 
 --- @method mapOk
@@ -209,13 +209,13 @@ end
 ---
 --- Maps the type of the Ok result of a Future.
 function Future:mapOk<E, U..., T...>(fn)
-	table.insert(self._onCompletion, {
-		on = "Ok",
-		type = "map",
-		fn = fn,
-	})
+    table.insert(self._onCompletion, {
+        on = "Ok",
+        type = "map",
+        fn = fn,
+    })
 
-	return self
+    return self
 end
 
 --- @method orElse
@@ -225,22 +225,22 @@ end
 ---
 --- On Err, executes another Future of the same type.
 function Future:orElse(fn)
-	return self.new(function()
-		local result = self:await()
+    return self.new(function()
+        local result = self:await()
 
-		if result:isOk() then
-			return result:unwrapOk()
-		elseif result:isErr() then
-			local newFuture = fn(result:unwrapErr())
-			local newResult = newFuture:await()
+        if result:isOk() then
+            return result:unwrapOk()
+        elseif result:isErr() then
+            local newFuture = fn(result:unwrapErr())
+            local newResult = newFuture:await()
 
-			if newResult:isOk() then
-				return newResult:unwrapOk()
-			elseif newResult:isErr() then
-				error(newResult:unwrapErr(), 0)
-			end
-		end
-	end)
+            if newResult:isOk() then
+                return newResult:unwrapOk()
+            elseif newResult:isErr() then
+                error(newResult:unwrapErr(), 0)
+            end
+        end
+    end)
 end
 
 --- @method unwrapOrElse
@@ -251,15 +251,15 @@ end
 --- On Err, the result is passed to the closure to create a Ok result,
 --- then returns a Future with that Ok result.
 function Future:unwrapOrElse(fn)
-	return self.new(function()
-		local result = self:await()
+    return self.new(function()
+        local result = self:await()
 
-		if result:isOk() then
-			return result:unwrapOk()
-		elseif result:isErr() then
-			return fn(result:unwrapErr())
-		end
-	end)
+        if result:isOk() then
+            return result:unwrapOk()
+        elseif result:isErr() then
+            return fn(result:unwrapErr())
+        end
+    end)
 end
 
 --- @method poll
@@ -276,77 +276,77 @@ end
 --- avoid polling a Future that is already ready.
 --- :::
 function Future:poll()
-	local threadExists = self.thread ~= nil
+    local threadExists = self.thread ~= nil
 
-	if not threadExists then
-		local thread = coroutine.create(function(...)
-			local success, result = xpcall(function(...)
-				local results = { self._callback(...) }
+    if not threadExists then
+        local thread = coroutine.create(function(...)
+            local success, result = xpcall(function(...)
+                local results = { self._callback(...) }
 
-				for _, command in self._onCompletion do
-					if command.on == "Err" then
-						continue
-					end
+                for _, command in self._onCompletion do
+                    if command.on == "Err" then
+                        continue
+                    end
 
-					if command.type == "map" then
-						results = { command.fn(table.unpack(results)) }
-					else
-						command.fn(table.unpack(results))
-					end
-				end
+                    if command.type == "map" then
+                        results = { command.fn(table.unpack(results)) }
+                    else
+                        command.fn(table.unpack(results))
+                    end
+                end
 
-				return results
-			end, function(err)
-				for _, command in self._onCompletion do
-					if command.on == "Ok" then
-						continue
-					end
+                return results
+            end, function(err)
+                for _, command in self._onCompletion do
+                    if command.on == "Ok" then
+                        continue
+                    end
 
-					if command.type == "map" then
-						_, err = pcall(command.fn, err)
-					else
-						command.fn(err)
-					end
-				end
+                    if command.type == "map" then
+                        _, err = pcall(command.fn, err)
+                    else
+                        command.fn(err)
+                    end
+                end
 
-				return err
-			end, ...)
+                return err
+            end, ...)
 
-			if not success then
-				result = { result }
-			end
+            if not success then
+                result = { result }
+            end
 
-			self._threadStatus = {
-				success = success,
-				result = result,
-			}
+            self._threadStatus = {
+                success = success,
+                result = result,
+            }
 
-			for _, yieldedThread in self._yieldedThreads do
-				if coroutine.status(yieldedThread) ~= "suspended" then
-					continue
-				end
+            for _, yieldedThread in self._yieldedThreads do
+                if coroutine.status(yieldedThread) ~= "suspended" then
+                    continue
+                end
 
-				coroutine.resume(yieldedThread)
-			end
-		end)
+                coroutine.resume(yieldedThread)
+            end
+        end)
 
-		self.thread = thread
-		coroutine.resume(thread, table.unpack(self._arguments))
-	end
+        self.thread = thread
+        coroutine.resume(thread, table.unpack(self._arguments))
+    end
 
-	local ready = if self._threadStatus then true else false
-	local success = if ready then self._threadStatus.success else false
-	local result = if ready then self._threadStatus.result else {}
+    local ready = if self._threadStatus then true else false
+    local success = if ready then self._threadStatus.success else false
+    local result = if ready then self._threadStatus.result else {}
 
-	local resultType: ("Ok" | "Err")? = if success then "Ok" elseif ready then "Err" else nil
+    local resultType: ("Ok" | "Err")? = if success then "Ok" elseif ready then "Err" else nil
 
-	if resultType == "Ok" then
-		return Poll.ok(table.unpack(result))
-	elseif resultType == "Err" then
-		return Poll.err(table.unpack(result))
-	else
-		return Poll.notReady()
-	end
+    if resultType == "Ok" then
+        return Poll.ok(table.unpack(result))
+    elseif resultType == "Err" then
+        return Poll.err(table.unpack(result))
+    else
+        return Poll.notReady()
+    end
 end
 
 --- @function new
@@ -358,12 +358,12 @@ end
 --- Creates a new Future, taking an asynchronous callback and
 --- parameters to pass into that callback.
 function Future.new(callback, ...)
-	return setmetatable({
-		_onCompletion = {},
-		_arguments = table.pack(...),
-		_callback = callback,
-		_yieldedThreads = {},
-	}, Future)
+    return setmetatable({
+        _onCompletion = {},
+        _arguments = table.pack(...),
+        _callback = callback,
+        _yieldedThreads = {},
+    }, Future)
 end
 
 return Future

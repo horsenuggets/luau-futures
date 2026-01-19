@@ -4,10 +4,10 @@ local prettyPrint = utils.prettyPrint
 type ResultType = "Ok" | "Err"
 
 type ResultImpl<E, U...> = {
-	isOk: (self: Result<E, U...>) -> boolean,
-	isErr: (self: Result<E, U...>) -> boolean,
-	unwrapOk: (self: Result<E, U...>) -> U...,
-	unwrapErr: (self: Result<E, U...>) -> E,
+    isOk: (self: Result<E, U...>) -> boolean,
+    isErr: (self: Result<E, U...>) -> boolean,
+    unwrapOk: (self: Result<E, U...>) -> U...,
+    unwrapErr: (self: Result<E, U...>) -> E,
 }
 
 --- @class Result
@@ -18,34 +18,34 @@ local Result = {}
 Result.__index = Result
 
 function Result:__tostring()
-	local results = prettyPrint(table.unpack(self._results))
+    local results = prettyPrint(table.unpack(self._results))
 
-	if self:isOk() then
-		return `Result::Ok({results})`
-	elseif self:isErr() then
-		return `Result::Err({results})`
-	end
+    if self:isOk() then
+        return `Result::Ok({results})`
+    elseif self:isErr() then
+        return `Result::Err({results})`
+    end
 
-	return "Result::Unknown"
+    return "Result::Unknown"
 end
 
 export type Result<E, U...> = {
-	_type: ResultType,
-	_results: { any },
+    _type: ResultType,
+    _results: { any },
 } & ResultImpl<E, U...>
 
 --- @within Result
 ---
 --- Checks whether the Result is of the `Ok` type.
 function Result:isOk(): boolean
-	return self._type == "Ok"
+    return self._type == "Ok"
 end
 
 --- @within Result
 ---
 --- Checks whether the Result is of the `Err` type.
 function Result:isErr(): boolean
-	return self._type == "Err"
+    return self._type == "Err"
 end
 
 --- @within Result
@@ -62,7 +62,7 @@ end
 --- ```
 --- :::
 function Result:unwrapOk<E, U...>(): U...
-	return table.unpack(self._results :: any)
+    return table.unpack(self._results :: any)
 end
 
 --- @within Result
@@ -79,36 +79,36 @@ end
 --- ```
 --- :::
 function Result:unwrapErr<E, U...>(): E
-	return table.unpack(self._results)
+    return table.unpack(self._results)
 end
 
 --- @within Result
 ---
 --- Creates a new Result of the `Ok` type.
 function Result.ok<U...>(...: U...): Result<never, U...>
-	local result = setmetatable({
-		_type = "Ok",
-		_results = table.pack(...),
-	}, Result) :: any
+    local result = setmetatable({
+        _type = "Ok",
+        _results = table.pack(...),
+    }, Result) :: any
 
-	return result
+    return result
 end
 
 --- @within Result
 ---
 --- Creates a new Result of the `Err` type.
 function Result.err<E>(errValue: E): Result<E, never>
-	local result = setmetatable({
-		_type = "Err",
-		_results = { errValue },
-	}, Result) :: any
+    local result = setmetatable({
+        _type = "Err",
+        _results = { errValue },
+    }, Result) :: any
 
-	return result
+    return result
 end
 
 type Library = {
-	ok: <U...>(U...) -> Result<never, U...>,
-	err: <E>(E) -> Result<E, never>,
+    ok: <U...>(U...) -> Result<never, U...>,
+    err: <E>(E) -> Result<E, never>,
 }
 
 return (Result :: any) :: Library

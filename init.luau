@@ -1,1 +1,1 @@
-return require("./src")
+return require("./src/init")

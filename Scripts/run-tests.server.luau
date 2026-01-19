@@ -6,12 +6,12 @@ local Packages = ReplicatedStorage.Packages
 local Jest = require("@DevPackages/Jest")
 
 local runCLIOptions = {
-	verbose = true,
-	ci = false,
+    verbose = true,
+    ci = false,
 }
 
 local projects = {
-	Packages.Project,
+    Packages.Project,
 }
 
 Jest.runCLI(script, runCLIOptions, projects):await()
