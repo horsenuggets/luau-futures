@@ -15,7 +15,7 @@ The `Future` type should be used when returning a future, such as in a
 function return.
 
 Example usage,
-```lua
+```luau
 function Class:method<E, U...>(future: Futures.FutureLike<E, U...>): Futures.Future<E, U...>
     return future:andThen(function(...)
         -- ...
@@ -58,7 +58,7 @@ So, you have an exhausted future that you want to typecheck.
 You can use type annotations and type casts to get around exhausted
 futures.
 
-```lua
+```luau
 local newFuture: Future<string, number, number, number> = exhaustedFuture:andThen(function(...)
     -- ...
     return 1, 2, 3
