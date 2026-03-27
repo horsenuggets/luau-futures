@@ -1,3 +1,11 @@
+--[[
+
+Future
+
+TODO: Add description.
+
+--]]
+
 local Poll = require("./Poll")
 export type Poll<E, U...> = Poll.Poll<E, U...>
 
@@ -47,6 +55,8 @@ function Future:after(fn)
             return result:unwrapOk()
         elseif result:isErr() then
             error(result:unwrapErr(), 0)
+        else
+            error("unreachable")
         end
     end)
 end
@@ -71,9 +81,13 @@ function Future:andThen(fn)
                 return newResult:unwrapOk()
             elseif newResult:isErr() then
                 error(newResult:unwrapErr(), 0)
+            else
+                error("unreachable")
             end
         elseif result:isErr() then
             error(result:unwrapErr(), 0)
+        else
+            error("unreachable")
         end
     end)
 end
@@ -238,7 +252,11 @@ function Future:orElse(fn)
                 return newResult:unwrapOk()
             elseif newResult:isErr() then
                 error(newResult:unwrapErr(), 0)
+            else
+                error("unreachable")
             end
+        else
+            error("unreachable")
         end
     end)
 end
@@ -258,6 +276,8 @@ function Future:unwrapOrElse(fn)
             return result:unwrapOk()
         elseif result:isErr() then
             return fn(result:unwrapErr())
+        else
+            error("unreachable")
         end
     end)
 end

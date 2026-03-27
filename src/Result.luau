@@ -1,3 +1,11 @@
+--[[
+
+Result
+
+TODO: Add description.
+
+--]]
+
 local utils = require("./utils")
 local prettyPrint = utils.prettyPrint
 
@@ -57,7 +65,7 @@ end
 ---
 --- ```lua
 --- if result:isOk() then
---- 	local result = result:unwrapOk()
+---     local result = result:unwrapOk()
 --- end
 --- ```
 --- :::
@@ -74,7 +82,7 @@ end
 ---
 --- ```lua
 --- if result:isErr() then
---- 	local err = result:unwrapErr()
+---     local err = result:unwrapErr()
 --- end
 --- ```
 --- :::

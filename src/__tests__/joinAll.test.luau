@@ -1,3 +1,11 @@
+--[[
+
+joinAll.test
+
+TODO: Add description.
+
+--]]
+
 local JestGlobals = require("@DevPackages/JestGlobals")
 
 local test = JestGlobals.test
@@ -29,7 +37,7 @@ test("joinAll", function()
     local values = { result:unwrapOk() }
 
     -- stylua: ignore
-	expect(values).toEqual({
+    expect(values).toEqual({
         "a", "b", "c",
         "d", "e", "f",
         "g", "h", "i",
