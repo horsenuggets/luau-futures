@@ -82,7 +82,14 @@ jobs:
         run: lune setup --no-update-luaurc
 
       - name: Run static analysis
-        run: lune run ./Submodules/luau-cicd/Scripts/RunStaticAnalysis.luau
+        run: |
+          luau-lsp analyze \
+            --ignore "DevPackages/**" \
+            --ignore "Packages/**" \
+            --ignore "Submodules/**" \
+            --ignore "src/__tests__/**" \
+            --ignore "Scripts/**" \
+            .
 
   version-match:
     name: Check version match
