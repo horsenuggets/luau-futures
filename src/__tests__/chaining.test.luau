@@ -1,6 +1,6 @@
 --[[
 
-chaining
+chaining.test
 
 TODO: Add description.
 

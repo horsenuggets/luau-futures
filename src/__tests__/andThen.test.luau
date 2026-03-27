@@ -1,6 +1,6 @@
 --[[
 
-andThen
+andThen.test
 
 TODO: Add description.
 

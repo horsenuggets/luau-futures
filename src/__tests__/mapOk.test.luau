@@ -1,6 +1,6 @@
 --[[
 
-mapOk
+mapOk.test
 
 TODO: Add description.
 

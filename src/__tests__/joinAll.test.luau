@@ -1,6 +1,6 @@
 --[[
 
-joinAll
+joinAll.test
 
 TODO: Add description.
 

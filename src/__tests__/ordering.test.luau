@@ -1,6 +1,6 @@
 --[[
 
-ordering
+ordering.test
 
 TODO: Add description.
 

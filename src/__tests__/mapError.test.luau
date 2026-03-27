@@ -1,6 +1,6 @@
 --[[
 
-mapError
+mapError.test
 
 TODO: Add description.
 

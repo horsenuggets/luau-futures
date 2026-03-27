@@ -1,6 +1,6 @@
 --[[
 
-poll
+poll.test
 
 TODO: Add description.
 

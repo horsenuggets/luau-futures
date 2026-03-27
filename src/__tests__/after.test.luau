@@ -1,6 +1,6 @@
 --[[
 
-after
+after.test
 
 TODO: Add description.
 

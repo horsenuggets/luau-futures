@@ -1,6 +1,6 @@
 --[[
 
-await
+await.test
 
 TODO: Add description.
 

@@ -1,6 +1,6 @@
 --[[
 
-inspectError
+inspectError.test
 
 TODO: Add description.
 

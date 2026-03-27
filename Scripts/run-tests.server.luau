@@ -1,6 +1,6 @@
 --[[
 
-run-tests
+run-tests.server
 
 TODO: Add description.
 

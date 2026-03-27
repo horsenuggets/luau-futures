@@ -1,6 +1,6 @@
 --[[
 
-inspectOk
+inspectOk.test
 
 TODO: Add description.
 
