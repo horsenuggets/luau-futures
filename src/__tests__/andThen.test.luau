@@ -1,3 +1,11 @@
+--[[
+
+andThen
+
+TODO: Add description.
+
+--]]
+
 local JestGlobals = require("@DevPackages/JestGlobals")
 
 local test = JestGlobals.test

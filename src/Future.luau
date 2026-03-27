@@ -1,3 +1,11 @@
+--[[
+
+Future
+
+TODO: Add description.
+
+--]]
+
 local Poll = require("./Poll")
 export type Poll<E, U...> = Poll.Poll<E, U...>
 

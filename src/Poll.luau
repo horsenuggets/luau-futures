@@ -1,3 +1,11 @@
+--[[
+
+Poll
+
+TODO: Add description.
+
+--]]
+
 local Result = require("./Result")
 type Result<E, U...> = Result.Result<E, U...>
 
@@ -16,10 +24,10 @@ type PollImpl<E, U...> = {
 --- local poll = Poll.ok(...)
 ---
 --- if poll:isReady() then
---- 	local result = poll:unwrap()
---- 	-- ...
+---     local result = poll:unwrap()
+---     -- ...
 --- elseif poll:isPending() then
---- 	-- ...
+---     -- ...
 --- end
 --- ```
 local Poll = {}
@@ -48,8 +56,8 @@ export type Poll<E, U...> = {
 --- ```lua
 --- local poll = future:poll()
 --- if poll:isReady() then
---- 	local result = poll:unwrap()
---- 	-- ...
+---     local result = poll:unwrap()
+---     -- ...
 --- end
 --- ```
 function Poll:isReady(): boolean
@@ -62,7 +70,7 @@ end
 --- ```lua
 --- local poll = future:poll()
 --- if poll:isPending() then
---- 	continue
+---     continue
 --- end
 --- ```
 function Poll:isPending(): boolean
@@ -76,11 +84,11 @@ end
 --- ```lua
 --- local poll = future:poll()
 --- if poll:isReady() then
---- 	local result = poll:unwrap()
---- 	-- ...
+---     local result = poll:unwrap()
+---     -- ...
 --- else
---- 	local result = poll:unwrap() --! Errors
---- 	-- Error: Attempt to unwrap a pending future
+---     local result = poll:unwrap() --! Errors
+---     -- Error: Attempt to unwrap a pending future
 --- end
 --- ```
 function Poll:unwrap<E, U...>(): Result<E, U...>
