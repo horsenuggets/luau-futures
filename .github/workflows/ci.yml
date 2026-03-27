@@ -89,6 +89,7 @@ jobs:
             --ignore "Submodules/**" \
             --ignore "src/__tests__/**" \
             --ignore "Scripts/**" \
+            --ignore "init.luau" \
             .
 
   version-match:
