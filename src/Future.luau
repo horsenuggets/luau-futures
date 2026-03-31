@@ -341,7 +341,7 @@ function Future:poll()
                 result = result,
             }
 
-            for _, yieldedThread in self._yieldedThreads do
+            for _, yieldedThread in self._yieldedThreads :: { thread } do
                 if coroutine.status(yieldedThread) ~= "suspended" then
                     continue
                 end
@@ -382,7 +382,7 @@ function Future.new(callback, ...)
         _onCompletion = {},
         _arguments = table.pack(...),
         _callback = callback,
-        _yieldedThreads = {},
+        _yieldedThreads = {} :: { thread },
     }, Future)
 end
 
