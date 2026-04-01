@@ -19,4 +19,4 @@ include = [
 exclude = ["**"]
 
 [dev-dependencies]
-Testable = "horsenuggets/testable@0.1.0"
+Testable = "horsenuggets/testable@1.1.0"
