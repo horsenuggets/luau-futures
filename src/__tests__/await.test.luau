@@ -7,6 +7,7 @@ TODO: Add description.
 --]]
 
 local JestGlobals = require("@DevPackages/JestGlobals")
+local task = require("@lune/task")
 
 local describe = JestGlobals.describe
 local test = JestGlobals.test
@@ -31,7 +32,7 @@ describe("await", function()
 
     test("yielding", function()
         local myFuture = Future.new(function()
-            wait()
+            task.wait()
             return "a", "b", "c"
         end)
 
