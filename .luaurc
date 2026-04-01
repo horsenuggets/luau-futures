@@ -12,7 +12,6 @@
         "beforeAll",
         "beforeEach",
         "describe",
-        "elapsedTime",
         "expect",
         "fail",
         "fdescribe",
