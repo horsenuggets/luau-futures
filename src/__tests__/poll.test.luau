@@ -1,4 +1,13 @@
+--[[
+
+poll.test
+
+TODO: Add description.
+
+--]]
+
 local JestGlobals = require("@DevPackages/JestGlobals")
+local task = require("@lune/task")
 
 local describe = JestGlobals.describe
 local test = JestGlobals.test
@@ -25,16 +34,15 @@ describe("poll", function()
     end)
 
     test("yielding", function()
-        local wait = wait
         local myFuture = Future.new(function()
-            wait(0.1)
+            task.wait(0.1)
             return "a", "b", "c"
         end)
 
         local poll = myFuture:poll()
         expect(poll:isPending()).toBe(true)
 
-        wait(0.1)
+        task.wait(0.1)
 
         poll = myFuture:poll()
         expect(poll:isReady()).toBe(true)

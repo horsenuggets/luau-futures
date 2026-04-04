@@ -1,22 +1,24 @@
 {
-	"name": "luau-futures",
-	"tree": {
-		"$className": "DataModel",
-		"ReplicatedStorage": {
-			"DevPackages": {
-				"$path": "DevPackages"
-			},
-			"Packages": {
-				"$className": "Folder",
-				"Project": {
-					"$path": "dist/src"
-				}
-			}
-		},
-		"ServerScriptService": {
-			"run-tests": {
-				"$path": "dist/run-tests.server.luau"
-			}
-		}
-	}
+    "name": "luau-futures",
+    "tree": {
+        "$className": "DataModel",
+        "ReplicatedStorage": {
+            "DevPackages": {
+                "$path": {
+                    "optional": "DevPackages"
+                }
+            },
+            "Packages": {
+                "$className": "Folder",
+                "Project": {
+                    "$path": "dist/src"
+                }
+            }
+        },
+        "ServerScriptService": {
+            "run-tests": {
+                "$path": "dist/run-tests.server.luau"
+            }
+        }
+    }
 }

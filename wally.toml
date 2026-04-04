@@ -1,21 +1,23 @@
 [package]
 name = "horsenuggets/luau-futures"
 description = "Rust-like futures for Luau"
-version = "2.0.0-beta.4"
+version = "2.0.0-beta.6"
 license = "MIT"
 authors = ["YetAnotherClown"]
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 repository = "https://github.com/horsenuggets/luau-futures"
 include = [
+    ".luaurc",
     "default.project.json",
+    "init.luau",
     "LICENSE",
     "README.md",
-    "init.luau",
     "src",
+    "src/**",
     "wally.toml",
 ]
 exclude = ["**"]
 
 [dev-dependencies]
-Testable = "horsenuggets/testable@0.1.0"
+Testable = "horsenuggets/testable@1.1.0"

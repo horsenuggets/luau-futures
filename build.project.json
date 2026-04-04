@@ -1,6 +1,6 @@
 {
-	"name": "luau-futures",
-	"tree": {
-		"$path": "dist/src"
-	}
+    "name": "luau-futures",
+    "tree": {
+        "$path": "dist/src"
+    }
 }

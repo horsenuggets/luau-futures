@@ -1,3 +1,11 @@
+--[[
+
+run-tests.server
+
+TODO: Add description.
+
+--]]
+
 _G.NOCOLOR = _G.NOCOLOR
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")

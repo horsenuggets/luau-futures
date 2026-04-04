@@ -1,3 +1,11 @@
+--[[
+
+utils
+
+TODO: Add description.
+
+--]]
+
 -- https://stackoverflow.com/questions/7526223/how-do-i-know-if-a-table-is-an-array/52697380#52697380
 local function isArray(t)
     if type(t) ~= "table" then
