@@ -8,10 +8,11 @@ registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 repository = "https://github.com/horsenuggets/luau-futures"
 include = [
+    ".luaurc",
     "default.project.json",
+    "init.luau",
     "LICENSE",
     "README.md",
-    "init.luau",
     "src",
     "src/**",
     "wally.toml",
@@ -19,4 +20,4 @@ include = [
 exclude = ["**"]
 
 [dev-dependencies]
-Testable = "horsenuggets/testable@0.1.0"
+Testable = "horsenuggets/testable@1.1.0"
