@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0-beta.6
+
+- Standardized config files and bumped dependencies
+- Updated submodules
+
 ## 2.0.0
 
 - Updated submodules
