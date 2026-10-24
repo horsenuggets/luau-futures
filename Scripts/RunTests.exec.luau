@@ -2,17 +2,21 @@
 
 --[[
 
-RunTests
+RunTests.exec
 
 Runs the luau-futures test suite.
 
 TODO: Migrate tests from Jest to Testable.
 
+[Usage] ./Scripts/RunTests.exec.luau
+
 --]]
 
-local function runTests()
+const RunTests = {}
+
+function RunTests.exec()
     print("Tests are pending migration from Jest to Testable.")
     print("Skipping tests for now.")
 end
 
-runTests()
+RunTests.exec()
