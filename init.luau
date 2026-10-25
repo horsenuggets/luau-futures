@@ -1,1 +1,1 @@
-return require("./src")
+return require("@self/src")
