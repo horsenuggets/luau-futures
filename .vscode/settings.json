@@ -19,10 +19,7 @@
     "luau-lsp.fflags.enableNewSolver": true,
     "luau-lsp.hover.multilineFunctionDefinitions": true,
     "luau-lsp.hover.showTableKinds": true,
-    "luau-lsp.ignoreGlobs": [
-        "DevPackages/*",
-        "dist/*"
-    ],
+    "luau-lsp.ignoreGlobs": ["DevPackages/*", "dist/*"],
     "luau-lsp.inlayHints.hideHintsForErrorTypes": true,
     "luau-lsp.require.directoryAliases": {
         "@DevPackages": "DevPackages/"
