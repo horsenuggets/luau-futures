@@ -36,7 +36,7 @@ test("joinAll", function()
 
     local values = { result:unwrapOk() }
 
-    -- stylua: ignore
+    -- [styluau] ignore
     expect(values).toEqual({
         "a", "b", "c",
         "d", "e", "f",
